@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Contate-nos</title>
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <h1 class="logo"><a href="#">Agencia CA</a></h1>
+        </nav>
+    </header>
+
+    <section class="main">
+        <form action="" method="get" id="form">
+            <!-- Dados pessoais -->
+            <fieldset>
+                <legend>Dados Pessoais</legend>
+                <input type="text" id="name" class="name" placeholder="Primeiro Nome">
+                <input type="text" id="lastName" class="lastName" placeholder="Sobrenome"><br>
+                <input type="number" name="age" id="age" placeholder="Idade" min="18"><br>
+                <input type="text" id="email" class="email" placeholder="Email">
+                <input type="text" name="numCell" id="numCell" placeholder="Nº Celular"><br>
+                <input type="text" name="cpf" id="cpf" placeholder="CPF">
+                <input type="text" name="rg" id="rg" placeholder="RG">
+            </fieldset>
+            <!-- Sexo -->
+            <fieldset>
+                <legend>Sexo</legend>
+                <!-- Masculino -->
+                <input type="radio" name="radSex" id="masc" checked>
+                <label for="masc">Masculino</label>
+                <!-- Feminino -->
+                <input type="radio" name="radSex" id="femi">
+                <label for="femi">Feminino</label>
+            </fieldset>
+            <!-- TextArea para texto -->
+            <fieldset>
+                <legend>Texto</legend>
+                <textarea name="text" id="text" cols="40" rows="10" placeholder="Digite Aqui.."></textarea>
+            </fieldset>
+            <input type="submit" value="Enviar" id="btn">
+        </form>
+    </section>
+    <script src="./javascript/script.js"></script>
+</body>
+</html>
