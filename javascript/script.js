@@ -15,8 +15,8 @@
     // Regex
     let rxName = /^([a-z]{3,50})+$/gi
     let rxEmail = /^[\w!#$%&'+/=?`{|}~^-]+(?:\.[\w!#$%&'+/=?`{|}~^-]+)*@(?:[A-Z0-9-]+\.)+[A-Z]{2,6}$/gi
-    let rxCpf = /^([0-9]{3}.)([0-9]{3}.)([0-9]{3}-)+([0-9]{2})$/g
-    let rxNumCell = /^(\(\d{2}\))|(\d{2})(\s?)+(9?[0-9]{4}(\s|-?)+([0-9]{4}))$/g
+    let rxCpf = /^([0-9]{3}.)([0-9]{3}.)([0-9]{3}-)([0-9]{2})$/g
+    let rxNumCell = /^(\(\d{2}\)|\d{2})(\s?)(9?(\s?)(\d{4})(\s|-?)(\d{4}))$/g
     let rxRg = /^([0-9]{2}.)([0-9]{3}.)([0-9]{3}-)[0-9]{2}$/g
 
     
@@ -27,14 +27,17 @@
     }
 
 
+
     // Varifica o pressionamento de teclas
     function verifyPressKey(event) {
+        
         if(event.code != "Backspace") {
             // Adiciona os caracters especiais do CPF
             addCaracters(cpf, 3, 7, 11)
 
             // Adiciona os caracters especias do RG
-            addCaracters(rg, 2, 6, 10) 
+            addCaracters(rg, 2, 6, 10)
+            
         }
     }
 
@@ -42,13 +45,6 @@
     // Valida os campos do formulario
     function valForm(event) {
         event.preventDefault()
-        
-        let valName = name.value.match(rxName)
-        let valLastName = lastName.value.match(rxName)
-        let valEmail = email.value.match(rxEmail)
-        let valCpf = cpf.value.match(rxCpf)
-        let valNumCell = numCell.value.match(rxNumCell)
-        let valRg = rg.value.match(rxRg)
 
         // Transformando CPF e RG em string com os números putos
         let rpCpf = cpf.value.replace('.', '').replace(".", '').replace("-", "")
@@ -62,15 +58,15 @@
         valCpfDigito(listCpf, cont1, cont2, rpCpf)
 
 
-        // Válidação de nome
-        if (valName != null) {
+        // Validação de nome
+        if (valInput(name, rxName)) {
             console.log("Nome Válido")
         } else {
             console.log("Nome Inválido")
         }
         
-        // Válidação de sobrenome
-        if (valLastName != null && lastName.value.length > 1) {
+        // Validação de sobrenome
+        if (valInput(lastName, rxName)) {
             console.log("Sobrenome Válido")
         } else {
             console.log("Sobrenome Inválido")
@@ -84,28 +80,28 @@
         }
 
         // Validação de Email
-        if (valEmail != null) {
+        if (valInput(email, rxEmail)) {
             console.log("Email válido")
         } else {
             console.log("Email inválido")
         }
 
-        // Válidação de cpf
-        if (valCpf != null && cpfValido(win.tot1, win.tot2, listCpf, rpCpf)) {
+        // Validação de cpf
+        if (valInput(cpf, rxCpf) && cpfValido(win.tot1, win.tot2, listCpf, rpCpf)) {
             console.log("CPF Válido")
         } else {
             console.log("CPF Inválido")
         }
 
         // Validação de Número de Celular
-        if (valNumCell) {
+        if (valInput(numCell, rxNumCell)) {
             console.log("Número Válido")
         } else {
             console.log("Número Inválido")
         }
 
         // Validação de RG
-        if(valRg && !sameNumList(rpRg)) {
+        if(valInput(rg, rxRg) && !sameNumList(rpRg)) {
             console.log("RG Válido")
         } else {
             console.log("RG Inválido")
@@ -113,12 +109,25 @@
 
         // Validação de Sexo
         console.log(valSex(sex))
-
-        console.log(text)
     }
 
+    let listForEvents = [name, lastName, email, cpf, numCell, rg]
+    let listForRegex = [rxName,
+        rxName,
+        rxEmail,
+        /^([0-9]{3}.)([0-9]{3}.)([0-9]{3}-)+([0-9]{1})$/g,
+        rxNumCell,
+        /^([0-9]{2}.)([0-9]{3}.)([0-9]{3}-)[0-9]{1}$/g
+    ]
+
+    
     btn.addEventListener("click", valForm)
     addEventListener("keydown", verifyPressKey)
     numCell.addEventListener('keypress', changeNumCell)
+    for (let i=0; i<listForEvents.length; i++) {
+        listForEvents[i].addEventListener("keydown", function(event){
+            valRealTime(event.target, listForRegex[i])
+        })
+    }
 
 })(window, document)

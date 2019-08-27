@@ -46,6 +46,29 @@ function valCpfDigito(listCpf, cont1, cont2, rpCpf) {
 }
 
 
+// Devolve o sexo
 function valSex(sex) {
     return (sex[0].checked)? "Masculino":"Feminino"
+}
+
+// Devolve se o campo é válido de acordo com a Regex
+function valInput(input, rxname) {
+    return input.value.match(rxname)
+}
+
+// Validação em tempo real dos campos, mudando a cor do background
+function valRealTime(input, rxname) {
+    if(valInput(input, rxname)) {
+        input.style.border = "3px solid green"    
+    } else {
+        input.style.border = "3px solid red"
+    }
+}
+
+
+
+function valFullForm(input, twoInput=true){
+    if (input && twoInput) {
+        return true;
+    }
 }
