@@ -1,7 +1,14 @@
+// Varifica se a lista tem os números iguais
+function sameNumList(list) {
+    for(let i=0; i<list.length; i++) {
+        return (list[i] == list[i + 1])? true:false
+    }
+}
+
 // Retorna se o cpf é válido ou não
 function cpfValido(d1, d2, list, cpf) {
     for(let i=0; i<cpf.length; i++) {
-        if(cpf[i] == cpf[i + 1]) {
+        if(sameNumList(cpf)) {
             return false
         } else if(d1 == list[9] && d2 == list[10]) {
             return true
@@ -36,4 +43,9 @@ function valCpfDigito(listCpf, cont1, cont2, rpCpf) {
 
     window.tot1 = tot1
     window.tot2 = tot2
-} 
+}
+
+
+function valSex(sex) {
+    return (sex[0].checked)? "Masculino":"Feminino"
+}

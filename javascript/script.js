@@ -8,32 +8,33 @@
     let email = doc.querySelector("#email")
     let cpf = doc.querySelector("#cpf")
     let numCell = doc.querySelector("#numCell")
-
+    let rg = doc.querySelector("#rg")
+    let sex = doc.getElementsByName("radSex")
+    let text = doc.querySelector("#text")
+    
     // Regex
     let rxName = /^([a-z]{3,50})+$/gi
     let rxEmail = /^[\w!#$%&'+/=?`{|}~^-]+(?:\.[\w!#$%&'+/=?`{|}~^-]+)*@(?:[A-Z0-9-]+\.)+[A-Z]{2,6}$/gi
     let rxCpf = /^([0-9]{3}.)([0-9]{3}.)([0-9]{3}-)+([0-9]{2})$/g
     let rxNumCell = /^(\(\d{2}\))|(\d{2})(\s?)+(9?[0-9]{4}(\s|-?)+([0-9]{4}))$/g
+    let rxRg = /^([0-9]{2}.)([0-9]{3}.)([0-9]{3}-)[0-9]{2}$/g
+
+    
+    // Função caso haja alteração no valor do Campo Número de celular
+    function changeNumCell(event) {
+        // Função para adicionar "(" e "-" ao Número de Celular
+        addCaractersNumCell(numCell)
+    }
 
 
     // Varifica o pressionamento de teclas
     function verifyPressKey(event) {
         if(event.code != "Backspace") {
-            // Estrutura para adicionar "." e "-" ao CPF
-            if(cpf.value.length == 3 || cpf.value.length == 7) {
-                cpf.value += "."
-            } else if(cpf.value.length == 11) {
-                cpf.value += "-"
-            }
+            // Adiciona os caracters especiais do CPF
+            addCaracters(cpf, 3, 7, 11)
 
-            // Estrutura para adicionar "(" e "-" ao Número
-            if(numCell.value.length == 0){
-                numCell.value += "("
-            } else if(numCell.value.length == 3) {
-                numCell.value += ")"
-            } else if(numCell.value.length == 4) {
-                numCell.value += " "
-            }
+            // Adiciona os caracters especias do RG
+            addCaracters(rg, 2, 6, 10) 
         }
     }
 
@@ -47,9 +48,12 @@
         let valEmail = email.value.match(rxEmail)
         let valCpf = cpf.value.match(rxCpf)
         let valNumCell = numCell.value.match(rxNumCell)
+        let valRg = rg.value.match(rxRg)
 
-        // Transformando cpf em string com os números putos
+        // Transformando CPF e RG em string com os números putos
         let rpCpf = cpf.value.replace('.', '').replace(".", '').replace("-", "")
+        let rpRg = rg.value.replace('.', '').replace(".", '').replace("-", "")
+
         let listCpf = []
         let cont1 = 10;
         let cont2 = 11;
@@ -94,14 +98,27 @@
         }
 
         // Validação de Número de Celular
-        if (valNumCell && numCell.value.length > 0) {
+        if (valNumCell) {
             console.log("Número Válido")
         } else {
             console.log("Número Inválido")
         }
+
+        // Validação de RG
+        if(valRg && !sameNumList(rpRg)) {
+            console.log("RG Válido")
+        } else {
+            console.log("RG Inválido")
+        }
+
+        // Validação de Sexo
+        console.log(valSex(sex))
+
+        console.log(text)
     }
 
     btn.addEventListener("click", valForm)
     addEventListener("keydown", verifyPressKey)
+    numCell.addEventListener('keypress', changeNumCell)
 
 })(window, document)
