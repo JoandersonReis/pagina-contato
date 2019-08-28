@@ -66,9 +66,11 @@ function valRealTime(input, rxname) {
 }
 
 
-
-function valFullForm(input, twoInput=true){
-    if (input && twoInput) {
-        return true;
+function valFullForm(list) {
+    for(let i=0; i<list.length; i++) {
+        if(!list[i]) {
+            return false
+        }
     }
+    return true
 }

@@ -12,8 +12,6 @@ function addCaractersNumCell(numCell) {
     if(numCell.value.length == 0){
         numCell.value += "("
     } else if(numCell.value.length == 3) {
-        numCell.value += ")"
-    } else if(numCell.value.length == 4) {
-        numCell.value += " "
+        numCell.value += ") "
     }
 }

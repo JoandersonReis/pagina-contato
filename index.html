@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Contate-nos</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/formcontato.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -12,32 +17,38 @@
             <h1 class="logo"><a href="#">Agencia CA</a></h1>
         </nav>
     </header>
-
+    
+    <div id="divMsg"><p id="msgValForm"></p></div>
+    
     <section class="main">
         <form action="" method="get" id="form">
             <!-- Dados pessoais -->
-            <fieldset>
+            <fieldset id="dados">
                 <legend>Dados Pessoais</legend>
-                <input type="text" id="name" class="name" placeholder="Primeiro Nome">
-                <input type="text" id="lastName" class="lastName" placeholder="Sobrenome"><br>
-                <input type="number" name="age" id="age" placeholder="Idade" min="18"><br>
-                <input type="text" id="email" class="email" placeholder="Email">
-                <input type="text" name="numCell" id="numCell" placeholder="Nº Celular"><br>
-                <input type="text" name="cpf" id="cpf" placeholder="CPF">
-                <input type="text" name="rg" id="rg" placeholder="RG">
+                <div>
+                    <input type="text" id="name" class="name" placeholder="Primeiro Nome" required>
+                    <input type="text" id="lastName" class="lastName" placeholder="Sobrenome" required><br>
+                    <input type="number" name="age" id="age" placeholder="Idade" min="18" required><br>
+                    <input type="text" id="email" class="email" placeholder="Email" required>
+                    <input type="text" name="numCell" id="numCell" placeholder="Nº Celular" required><br>
+                    <input type="text" name="cpf" id="cpf" placeholder="CPF" required>
+                    <input type="text" name="rg" id="rg" placeholder="RG" required>
+                </div>
             </fieldset>
             <!-- Sexo -->
-            <fieldset>
+            <fieldset id="sexo">
                 <legend>Sexo</legend>
-                <!-- Masculino -->
-                <input type="radio" name="radSex" id="masc" checked>
-                <label for="masc">Masculino</label>
-                <!-- Feminino -->
-                <input type="radio" name="radSex" id="femi">
-                <label for="femi">Feminino</label>
+                <div>
+                    <!-- Masculino -->
+                    <input type="radio" name="radSex" id="masc" checked>
+                    <label for="masc">Masculino</label><br>
+                    <!-- Feminino -->
+                    <input type="radio" name="radSex" id="femi">
+                    <label for="femi">Feminino</label>
+                </div>   
             </fieldset>
             <!-- TextArea para texto -->
-            <fieldset>
+            <fieldset id="textArea">
                 <legend>Texto</legend>
                 <textarea name="text" id="text" cols="40" rows="10" placeholder="Digite Aqui.."></textarea>
             </fieldset>
@@ -48,5 +59,6 @@
     <script src="./javascript/caracters.js"></script>
     <script src="./javascript/validacoes.js"></script>
     <script src="./javascript/script.js"></script>
+    <script src="./javascript/msg.js"></script>
 </body>
 </html>

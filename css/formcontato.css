@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+
+.nav {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
+    background-color: #30336b;
+    width: 100%;
+    margin-top: -20px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Bree Serif', serif;
+}
+
+
+
+/* Mensagem */
+
+#divMsg {
+    display: none;
+    position: fixed;
+    margin-top: 50px;
+    padding: 20px 0px;
+    text-align: center;
+    background-color: red;
+    width: 100%;
+}
+
+#divMsg p {
+    color: white;
+    font-size: 15pt;
+    font-weight: bold;
+}
+
+/* Main Form*/
+
+
+#form {
+    margin: 20px auto;
+    width: 50vw;
+}
+fieldset {
+    margin-bottom: 20px;
+}
+
+
+#dados {
+    width: 100%;
+    padding: 30px;
+}
+legend {
+    text-align: center;
+    font-size: 14pt;
+    font-family: sans-serif;
+}
+#dados div {
+    display: block;
+    margin: 0 5%;
+}
+#dados input {
+    width: 20vw;
+    margin: 10px;
+    height: 20px;
+    font-size: 13pt;
+    border-radius: 1px;
+    border: 1px solid gray;
+}
+
+
+#sexo {
+    width: 100%;
+    padding: 30px;
+    font-family: sans-serif;
+}
+#sexo div {
+    text-align: center;
+}
+#sexo label {
+    margin-right: 20px;
+}
+#sexo input {
+    background-color: rgb(77, 151, 194);
+    margin: 10px 0;
+}
+
+
+
+#textArea {
+    width: 100%;
+    padding: 30px;
+}
+#text {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    font-size: 14pt;
+}
+
+
+/* Button */
+
+#btn {
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+    font-family: sans-serif;
+    font-size: 14pt;
+    color: white;
+    background-color: rgb(9, 165, 9);
+    border: none;
+    border-radius: 2px;
+    margin: 0 auto;
+    font-weight: bold;
+    transition: 0.2s ease;
+}
+#btn:hover {
+    background-color: rgb(29, 179, 29);
+    border-radius: 0px 0px 50% 50%;
+}

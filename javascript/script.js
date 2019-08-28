@@ -11,6 +11,8 @@
     let rg = doc.querySelector("#rg")
     let sex = doc.getElementsByName("radSex")
     let text = doc.querySelector("#text")
+
+    let listForEvents = [name, lastName, email, cpf, numCell, rg]
     
     // Regex
     let rxName = /^([a-z]{3,50})+$/gi
@@ -46,6 +48,8 @@
     function valForm(event) {
         event.preventDefault()
 
+        let listFullForm = [];
+
         // Transformando CPF e RG em string com os números putos
         let rpCpf = cpf.value.replace('.', '').replace(".", '').replace("-", "")
         let rpRg = rg.value.replace('.', '').replace(".", '').replace("-", "")
@@ -60,73 +64,83 @@
 
         // Validação de nome
         if (valInput(name, rxName)) {
-            console.log("Nome Válido")
+            listFullForm.push(true)
         } else {
-            console.log("Nome Inválido")
+            listFullForm.push(false)
         }
         
         // Validação de sobrenome
         if (valInput(lastName, rxName)) {
-            console.log("Sobrenome Válido")
+            listFullForm.push(true)
         } else {
-            console.log("Sobrenome Inválido")
+            listFullForm.push(false)
         }
 
         // Validação de idade
         if (age.value >= 18 && age.value < 110) {
-            console.log("Idade Válida")
+            listFullForm.push(true)
         } else {
-            console.log("Idade Inválida")
+            listFullForm.push(false)
         }
 
         // Validação de Email
         if (valInput(email, rxEmail)) {
-            console.log("Email válido")
+            listFullForm.push(true)
         } else {
-            console.log("Email inválido")
+            listFullForm.push(false)
         }
 
         // Validação de cpf
         if (valInput(cpf, rxCpf) && cpfValido(win.tot1, win.tot2, listCpf, rpCpf)) {
-            console.log("CPF Válido")
+            listFullForm.push(true)
         } else {
-            console.log("CPF Inválido")
+            listFullForm.push(false)
         }
 
         // Validação de Número de Celular
         if (valInput(numCell, rxNumCell)) {
-            console.log("Número Válido")
+            listFullForm.push(true)
         } else {
-            console.log("Número Inválido")
+            listFullForm.push(false)
         }
 
         // Validação de RG
         if(valInput(rg, rxRg) && !sameNumList(rpRg)) {
-            console.log("RG Válido")
+            listFullForm.push(true)
         } else {
-            console.log("RG Inválido")
+            listFullForm.push(false)
         }
-
-        // Validação de Sexo
-        console.log(valSex(sex))
+        
+        $(function(){
+            if(valFullForm(listFullForm)) {
+                $("#msgValForm").text("Formulário Enviado")
+                $("#divMsg").css({"background-color": "green"})
+            } else {
+                $("#msgValForm").text("Formulário Recusado, Verifique o formulário")
+                $("#divMsg").css({"background-color": "red"})
+            }
+            $("#divMsg").slideDown(1000)
+            .fadeOut(1000)
+        })
     }
 
-    let listForEvents = [name, lastName, email, cpf, numCell, rg]
+    
     let listForRegex = [rxName,
         rxName,
         rxEmail,
-        /^([0-9]{3}.)([0-9]{3}.)([0-9]{3}-)+([0-9]{1})$/g,
+        /^([0-9]{3}.)([0-9]{3}.)([0-9]{3}-)([0-9]{1})$/g,
         rxNumCell,
         /^([0-9]{2}.)([0-9]{3}.)([0-9]{3}-)[0-9]{1}$/g
     ]
 
-    
     btn.addEventListener("click", valForm)
     addEventListener("keydown", verifyPressKey)
     numCell.addEventListener('keypress', changeNumCell)
     for (let i=0; i<listForEvents.length; i++) {
         listForEvents[i].addEventListener("keydown", function(event){
-            valRealTime(event.target, listForRegex[i])
+            if(event.code != "Tab") {
+                valRealTime(event.target, listForRegex[i])
+            }
         })
     }
 
